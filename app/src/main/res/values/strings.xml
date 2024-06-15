@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">BookStore</string>
+    <string name="app_name">BOOK STORE</string>
+    <!-- Login -->
+    <string name="title_login">Hello,</string>
+    <string name="subtitle_login">Welcome Back! Please enter your details.</string>
+    <string name="show_password">Show Password</string>
+    <string name="login">Sign In</string>
+    <string name="ask_login">Don\'t have an account?</string>
+    <!-- Login & Register -->
+    <string name="email">Email</string>
+    <string name="email_empty">Email cannot be empty</string>
+    <string name="email_placeholder">Enter Email</string>
+    <string name="email_invalid">Invalid Email</string>
+    <string name="password">Password</string>
+    <string name="password_empty">Password cannot be empty</string>
+    <string name="password_length">Password at least 8 characters</string>
+    <string name="password_placeholder">Enter Password</string>
+    <string name="login_success">Login Success!</string>
+    <!-- Register -->
+    <string name="title_register">Sign up</string>
+    <string name="subtitle_register">Let\'s register your account.</string>
+    <string name="consent">Accept terms &amp; Condition </string>
+    <string name="register">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="name_placeholder">Enter Name</string>
+    <string name="name_empty">Name cannot be empty</string>
+    <string name="name_length">Name at least 4 characters</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password_invalid">Password not match</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="create_password">Create a password</string>
+    <string name="ask_register">Already have an account?</string>
+    <string name="register_success">Register Success!</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="sign_in">Login</string>
+    <string name="username">Username</string>
+    <string name="username_placeholder">Enter Username</string>
 </resources>
