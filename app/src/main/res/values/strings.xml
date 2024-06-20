@@ -41,4 +41,17 @@
     <string name="home">Home</string>
     <string name="order">Order</string>
     <string name="profile">Profile</string>
+    <string name="book_best_seller">Book Best Seller</string>
+    <string name="your_order_list_book">Your Order List Book</string>
+    <string name="post_email">Post Email</string>
+    <string name="logout">Logout</string>
+    <string name="example_gmail_com">Example@gmail.com</string>
+    <string name="user">User</string>
+    <string name="update_user">Update User</string>
+    <string name="gmail">Example@gmail.com</string>
+    <string name="submit">Submit</string>
+    <string name="new_password">new password</string>
+    <string name="current_password">Password</string>
+    <string name="ex_password">password</string>
+
 </resources>

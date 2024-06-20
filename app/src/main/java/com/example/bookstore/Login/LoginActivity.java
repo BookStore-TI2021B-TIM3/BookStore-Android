@@ -1,6 +1,7 @@
 package com.example.bookstore.Login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
@@ -8,13 +9,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bookstore.Api.ApiClient;
 import com.example.bookstore.Api.ApiService;
 import com.example.bookstore.Api.LoginUser;
 import com.example.bookstore.MainActivity;
 import com.example.bookstore.R;
 import com.example.bookstore.Register.RegisterActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,20 +80,23 @@ public class LoginActivity extends AppCompatActivity {
                     LoginResponse loginResponse = response.body();
                     if (loginResponse != null && "success".equals(loginResponse.getStatus())) {
 
+                        // Store user ID in SharedPreferences
+                        SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putInt("user_id", loginResponse.getUserId()); // Store user_id
+                        editor.apply();
+
                         Toast.makeText(getApplicationContext(), loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-
                         Toast.makeText(getApplicationContext(), loginResponse != null ? loginResponse.getMessage() : "Unknown error", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-
                     Toast.makeText(getApplicationContext(), "Failed to login. Please try again later.", Toast.LENGTH_SHORT).show();
                 }
             }
-
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
