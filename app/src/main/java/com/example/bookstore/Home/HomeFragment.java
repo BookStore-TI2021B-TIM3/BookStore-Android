@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvBanner;
     private BooksAdapter booksAdapter;
     private BannerAdapter bannerAdapter;
+    private SearchView searchView;
 
     @SuppressLint("StaticFieldLeak")
     @Override
@@ -28,6 +30,7 @@ public class HomeFragment extends Fragment {
 
         rvBook = view.findViewById(R.id.rv_book);
         rvBanner = view.findViewById(R.id.rv_banner);
+        searchView = view.findViewById(R.id.searchView);
 
         // Setup RecyclerView with GridLayoutManager
         rvBook.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -53,9 +56,26 @@ public class HomeFragment extends Fragment {
             protected void onPostExecute(ArrayList<Book> books) {
                 booksAdapter = new BooksAdapter(books);
                 rvBook.setAdapter(booksAdapter);
+                setupSearchView();
             }
         }.execute();
 
         return view;
+    }
+
+    private void setupSearchView() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                booksAdapter.filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                booksAdapter.filter(newText);
+                return false;
+            }
+        });
     }
 }

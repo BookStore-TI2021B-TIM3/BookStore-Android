@@ -10,13 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookstore.R;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHolder> {
 
     private ArrayList<Book> books;
+    private ArrayList<Book> filteredBooks;
 
     public BooksAdapter(ArrayList<Book> books) {
         this.books = books;
+        this.filteredBooks = new ArrayList<>(books);
     }
 
     @NonNull
@@ -28,7 +32,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Book book = books.get(position);
+        Book book = filteredBooks.get(position);
         holder.title.setText(book.getTitle());
         holder.author.setText(book.getAuthor());
         holder.price.setText(book.getPrice());
@@ -38,7 +42,18 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
 
     @Override
     public int getItemCount() {
-        return books.size();
+        return filteredBooks.size();
+    }
+
+    public void filter(String query) {
+        if (query.isEmpty()) {
+            filteredBooks = new ArrayList<>(books);
+        } else {
+            filteredBooks = (ArrayList<Book>) books.stream()
+                    .filter(book -> book.getTitle().toLowerCase().contains(query.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+        notifyDataSetChanged();
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
