@@ -54,9 +54,11 @@ public class HomeFragment extends Fragment {
         new ApiBook() {
             @Override
             protected void onPostExecute(ArrayList<Book> books) {
-                booksAdapter = new BooksAdapter(books);
-                rvBook.setAdapter(booksAdapter);
-                setupSearchView();
+                if (books != null && getContext() != null) {
+                    booksAdapter = new BooksAdapter(books, getContext());
+                    rvBook.setAdapter(booksAdapter);
+                    setupSearchView();
+                }
             }
         }.execute();
 
@@ -67,13 +69,17 @@ public class HomeFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                booksAdapter.filter(query);
+                if (booksAdapter != null) {
+                    booksAdapter.filter(query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                booksAdapter.filter(newText);
+                if (booksAdapter != null) {
+                    booksAdapter.filter(newText);
+                }
                 return false;
             }
         });

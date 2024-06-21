@@ -1,5 +1,7 @@
 package com.example.bookstore.Home;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.bookstore.Detail.OrderActivity;
 import com.example.bookstore.R;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -17,10 +20,12 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
 
     private ArrayList<Book> books;
     private ArrayList<Book> filteredBooks;
+    private Context context;
 
-    public BooksAdapter(ArrayList<Book> books) {
+    public BooksAdapter(ArrayList<Book> books, Context context) {
         this.books = books;
         this.filteredBooks = new ArrayList<>(books);
+        this.context = context;
     }
 
     @NonNull
@@ -38,6 +43,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
         holder.price.setText(book.getPrice());
         holder.rating.setText(String.valueOf(book.getRating()));
         Picasso.get().load(book.getImageUrl()).into(holder.image);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, OrderActivity.class);
+            intent.putExtra("book", book);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -57,7 +67,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
-        TextView title, author, price, rating, synopsis;
+        TextView title, author, price, rating;
         ImageView image;
 
         public BookViewHolder(@NonNull View itemView) {

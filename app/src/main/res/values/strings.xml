@@ -53,5 +53,9 @@
     <string name="new_password">new password</string>
     <string name="current_password">Password</string>
     <string name="ex_password">password</string>
+    <string name="book_desciption">book description</string>
+    <string name="name_author">name author</string>
+    <string name="title">Title :</string>
+    <string name="buy">Buy</string>
 
 </resources>

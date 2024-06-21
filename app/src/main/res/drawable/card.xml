@@ -1,0 +1,11 @@
+<!-- textview_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Warna latar belakang -->
+    <solid android:color="#DDE8FF" />
+
+    <!-- Sudut bulat pada elemen -->
+    <corners android:radius="4dp" />
+
+</shape>
