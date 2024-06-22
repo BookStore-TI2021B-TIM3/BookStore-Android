@@ -57,5 +57,6 @@
     <string name="name_author">name author</string>
     <string name="title">Title :</string>
     <string name="buy">Buy</string>
+    <string name="OrderBook">Order Book</string>
 
 </resources>

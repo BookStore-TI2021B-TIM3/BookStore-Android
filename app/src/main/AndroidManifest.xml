@@ -17,6 +17,9 @@
         android:theme="@style/Theme.BookStore"
         tools:targetApi="31">
         <activity
+            android:name=".Detail.SuccesDialogFragment"
+            android:exported="false" />
+        <activity
             android:name=".Detail.OrderActivity"
             android:exported="false" />
         <activity

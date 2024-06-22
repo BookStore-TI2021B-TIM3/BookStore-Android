@@ -30,7 +30,7 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_model"
+            android:id="@+id/rv_order"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:paddingTop="-1dp"
