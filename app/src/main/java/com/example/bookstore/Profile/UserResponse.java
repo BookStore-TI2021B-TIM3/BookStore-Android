@@ -34,16 +34,25 @@ public class UserResponse {
         @SerializedName("password")
         private String password;
 
+        @SerializedName("location")
+        private String location;
+
         public String getUsername() {
+
             return username;
         }
 
         public String getEmail() {
+
             return email;
         }
 
         public String getPassword() {
             return password;
+        }
+
+        public String getLocation() {
+            return location;
         }
     }
 }

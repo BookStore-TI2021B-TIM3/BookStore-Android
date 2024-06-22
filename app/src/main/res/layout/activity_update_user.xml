@@ -33,19 +33,21 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/location"
+        android:inputType="textEmailAddress"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/current_password"
-        android:inputType="text"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/new_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/new_password"
-        android:inputType="text"
+        android:inputType="textVisiblePassword"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
@@ -54,9 +56,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/submit"
-        android:background="@drawable/rounded_button"
         android:textColor="@android:color/white"
         android:gravity="center"
         android:textSize="16sp"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/cancel"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/red"
+        android:gravity="center"
+        android:textSize="16sp"
+        tools:ignore="PrivateResource,TouchTargetSizeCheck" />
 </LinearLayout>

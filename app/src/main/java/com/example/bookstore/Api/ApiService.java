@@ -7,11 +7,14 @@ import com.example.bookstore.Profile.UserResponse;
 import com.example.bookstore.Register.RegisterResponse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -29,4 +32,7 @@ public interface ApiService {
 
     @GET("fetch_book.php")
     Call<ArrayList<Book>> fetchBooks();
+
+    @DELETE("delete_user.php")
+    Call<UserResponse> deleteUser(@Query("id") int userId);
 }

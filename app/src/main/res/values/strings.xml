@@ -50,7 +50,7 @@
     <string name="update_user">Update User</string>
     <string name="gmail">Example@gmail.com</string>
     <string name="submit">Submit</string>
-    <string name="new_password">new password</string>
+    <string name="new_password">New Password</string>
     <string name="current_password">Password</string>
     <string name="ex_password">password</string>
     <string name="book_desciption">book description</string>
@@ -58,5 +58,7 @@
     <string name="title">Title :</string>
     <string name="buy">Buy</string>
     <string name="OrderBook">Order Book</string>
+    <string name="location">Location</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

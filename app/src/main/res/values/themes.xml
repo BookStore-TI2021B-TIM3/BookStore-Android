@@ -3,6 +3,7 @@
     <style name="Base.Theme.BookStore" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#445EBF</item>
         <item name="colorSecondary">#5AB2FF</item>
+        <item name="colorContainer">#FF00</item>
     </style>
 
     <style name="Theme.BookStore" parent="Base.Theme.BookStore" />

@@ -145,4 +145,10 @@
         app:layout_constraintEnd_toEndOf="@id/passwordEditTextLayout"
         app:layout_constraintStart_toStartOf="@id/passwordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@id/passwordVisible"/>
+
+    <EditText
+        android:id="@+id/LocationET"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

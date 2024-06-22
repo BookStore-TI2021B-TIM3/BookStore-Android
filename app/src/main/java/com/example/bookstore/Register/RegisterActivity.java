@@ -1,5 +1,6 @@
 package com.example.bookstore.Register;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
@@ -17,9 +18,10 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText edtUsername, edtEmail, edtPassword;
+    EditText edtUsername, edtEmail, edtPassword, edtLocation;
     Button btnRegister;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +31,16 @@ public class RegisterActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edt_email_login);
         edtPassword = findViewById(R.id.edt_password_login);
         btnRegister = findViewById(R.id.registerButton);
+        edtLocation = findViewById(R.id.LocationET);
 
         btnRegister.setOnClickListener(v -> {
             String username = edtUsername.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
+            String location = edtLocation.getText().toString().trim();
 
             if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                registerUser(username, email, password);
+                registerUser(username, email, password, location);
             } else {
                 Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             }
@@ -47,19 +51,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         passwordVisibleCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Tampilkan password
+                // Show password
                 passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT);
             } else {
-                // Sembunyikan password
+                // Hide password
                 passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
         });
 
     }
 
-    private void registerUser(String username, String email, String password) {
+    private void registerUser(String username, String email, String password, String location) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        RegisterUser user = new RegisterUser(username, email, password);
+        RegisterUser user = new RegisterUser(username, email, password, location);
 
         Call<RegisterResponse> call = apiService.registerUser(user);
         call.enqueue(new Callback<RegisterResponse>() {

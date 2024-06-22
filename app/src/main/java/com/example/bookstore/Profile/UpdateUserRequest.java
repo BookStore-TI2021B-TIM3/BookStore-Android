@@ -5,14 +5,14 @@ public class UpdateUserRequest {
     private String username;
     private String email;
     private String password;
-    private String newPassword;
+    private String location;
 
-    public UpdateUserRequest(int id, String username, String email, String password, String newPassword) {
+    public UpdateUserRequest(int id, String username, String email, String password, String location) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.newPassword = newPassword;
+        this.location = location;
     }
 
     // Getters and Setters
@@ -48,11 +48,11 @@ public class UpdateUserRequest {
         this.password = password;
     }
 
-    public String getNewPassword() {
-        return newPassword;
+    public String getLocation() {
+        return location;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
