@@ -8,20 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.bookstore.Api.ApiClient;
 import com.example.bookstore.Api.ApiService;
 import com.example.bookstore.R;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateUserActivity extends AppCompatActivity {
 
-    private EditText usernameEditText, emailEditText, passwordEditText, locationEditText;
+    private EditText usernameEditText, emailEditText, passwordEditText, locationEditText, phoneEditText;
     private Button submitButton, cancelButton;
     private ProgressDialog progressDialog;
 
@@ -37,6 +34,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         locationEditText = findViewById(R.id.location);
+        phoneEditText = findViewById(R.id.phone);
         submitButton = findViewById(R.id.submit);
         cancelButton = findViewById(R.id.cancel);
 
@@ -47,12 +45,14 @@ public class UpdateUserActivity extends AppCompatActivity {
         String email = intent.getStringExtra("email");
         String password = intent.getStringExtra("password");
         String location = intent.getStringExtra("location");
+        String phone = intent.getStringExtra("phone");
 
         // Set initial values
         usernameEditText.setText(username);
         emailEditText.setText(email);
         passwordEditText.setText(password);
         locationEditText.setText(location);
+        phoneEditText.setText(phone);
 
         // Initialize progress dialog
         progressDialog = new ProgressDialog(this);
@@ -67,8 +67,8 @@ public class UpdateUserActivity extends AppCompatActivity {
                 String updatedEmail = emailEditText.getText().toString().trim();
                 String updatedPassword = passwordEditText.getText().toString().trim();
                 String updatedLocation = locationEditText.getText().toString().trim();
+                String updatedPhone = phoneEditText.getText().toString().trim();
 
-                // Validate input
                 if (TextUtils.isEmpty(updatedUsername) || TextUtils.isEmpty(updatedEmail)) {
                     Toast.makeText(UpdateUserActivity.this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
                 } else {
@@ -79,7 +79,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                     ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
                     // Create UpdateUserRequest object
-                    UpdateUserRequest updateUserRequest = new UpdateUserRequest(userId, updatedUsername, updatedEmail, updatedPassword, updatedLocation);
+                    UpdateUserRequest updateUserRequest = new UpdateUserRequest(userId, updatedUsername, updatedEmail, updatedPassword, updatedPhone, updatedLocation);
 
                     // Make POST request
                     Call<UserResponse> call = apiService.updateUserDetails(updateUserRequest);

@@ -33,11 +33,19 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone"
+        android:inputType="text"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
         android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/location"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText

@@ -37,13 +37,14 @@ public class UserResponse {
         @SerializedName("location")
         private String location;
 
-        public String getUsername() {
+        @SerializedName("phone")
+        private String phone; // Changed to Integer
 
+        public String getUsername() {
             return username;
         }
 
         public String getEmail() {
-
             return email;
         }
 
@@ -53,6 +54,10 @@ public class UserResponse {
 
         public String getLocation() {
             return location;
+        }
+
+        public String getPhone() {
+            return phone;
         }
     }
 }

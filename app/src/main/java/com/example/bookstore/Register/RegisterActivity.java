@@ -1,27 +1,28 @@
 package com.example.bookstore.Register;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bookstore.Api.ApiClient;
 import com.example.bookstore.Api.ApiService;
 import com.example.bookstore.Api.RegisterUser;
 import com.example.bookstore.R;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText edtUsername, edtEmail, edtPassword, edtLocation;
+    EditText edtUsername, edtEmail, edtPassword, edtPhone, edtLocation;
     Button btnRegister;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,17 +33,19 @@ public class RegisterActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edt_password_login);
         btnRegister = findViewById(R.id.registerButton);
         edtLocation = findViewById(R.id.LocationET);
+        edtPhone = findViewById(R.id.PhoneET);
 
         btnRegister.setOnClickListener(v -> {
             String username = edtUsername.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
             String location = edtLocation.getText().toString().trim();
+            String phone = edtPhone.getText().toString().trim(); // Phone as String
 
             if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                registerUser(username, email, password, location);
+                registerUser(username, email, password, phone, location.isEmpty() ? null : location);
             } else {
-                Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -58,12 +61,11 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
         });
-
     }
 
-    private void registerUser(String username, String email, String password, String location) {
+    private void registerUser(String username, String email, String password, String phone, String location) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        RegisterUser user = new RegisterUser(username, email, password, location);
+        RegisterUser user = new RegisterUser(username, email, password, phone, location);
 
         Call<RegisterResponse> call = apiService.registerUser(user);
         call.enqueue(new Callback<RegisterResponse>() {

@@ -6,13 +6,15 @@ public class UpdateUserRequest {
     private String email;
     private String password;
     private String location;
+    private String phone;
 
-    public UpdateUserRequest(int id, String username, String email, String password, String location) {
+    public UpdateUserRequest(int id, String username, String email, String password, String location, String phone) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.location = location;
+        this.phone = phone;
     }
 
     // Getters and Setters
@@ -54,5 +56,13 @@ public class UpdateUserRequest {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
