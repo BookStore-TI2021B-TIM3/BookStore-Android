@@ -38,7 +38,7 @@ public class UserResponse {
         private String location;
 
         @SerializedName("phone")
-        private String phone; // Changed to Integer
+        private String phone;
 
         public String getUsername() {
             return username;

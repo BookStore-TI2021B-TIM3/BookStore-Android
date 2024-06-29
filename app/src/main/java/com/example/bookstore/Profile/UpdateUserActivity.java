@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bookstore.Api.ApiClient;
 import com.example.bookstore.Api.ApiService;
+import com.example.bookstore.Detail.OrderActivity;
 import com.example.bookstore.R;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -91,6 +95,10 @@ public class UpdateUserActivity extends AppCompatActivity {
                                 UserResponse userResponse = response.body();
                                 if (userResponse != null && userResponse.getStatus().equals("success")) {
                                     Toast.makeText(UpdateUserActivity.this, "User details updated successfully", Toast.LENGTH_SHORT).show();
+                                    // Start OrderActivity with the updated username
+                                    Intent intent = new Intent(UpdateUserActivity.this, OrderActivity.class);
+                                    intent.putExtra("username", updatedUsername);
+                                    startActivity(intent);
                                     finish(); // Close activity after successful update
                                 } else {
                                     String errorMessage = "Failed to update user details";

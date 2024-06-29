@@ -1,5 +1,6 @@
 package com.example.bookstore.Register;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.Button;
@@ -75,6 +76,13 @@ public class RegisterActivity extends AppCompatActivity {
                     RegisterResponse registerResponse = response.body();
                     Toast.makeText(RegisterActivity.this, registerResponse.getMessage(), Toast.LENGTH_LONG).show();
                     if (registerResponse.getStatus().equals("success")) {
+                        // Save user data to SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", username);
+                        editor.putString("phone", phone);
+                        editor.apply();
+
                         finish();
                     }
                 } else {

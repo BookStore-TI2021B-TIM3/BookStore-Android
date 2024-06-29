@@ -3,9 +3,9 @@ package com.example.bookstore.Api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient {
+public class RetrofitClient {
     private static final String BASE_URL = "http://192.168.0.102/Web_BookStore/Connection/";
-    private static Retrofit retrofit;
+    private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
         if (retrofit == null) {
@@ -15,5 +15,9 @@ public class ApiClient {
                     .build();
         }
         return retrofit;
+    }
+
+    public static ApiService getOrderApiService() {
+        return getClient().create(ApiService.class);
     }
 }

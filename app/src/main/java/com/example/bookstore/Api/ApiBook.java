@@ -14,7 +14,7 @@ public class ApiBook extends AsyncTask<Void, Void, ArrayList<Book>> {
     @Override
     protected ArrayList<Book> doInBackground(Void... voids) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.81.67/Web_BookStore/Connection/")
+                .baseUrl("http://192.168.0.102/Web_BookStore/Connection/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

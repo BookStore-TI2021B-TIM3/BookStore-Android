@@ -94,6 +94,11 @@ public class ProfileFragment extends Fragment {
                     String phone = user.getPhone(); // Changed to String
                     String location = user.getLocation();
 
+                    // Save username in SharedPreferences
+                    SharedPreferences.Editor editor = requireActivity().getSharedPreferences("user_prefs", MODE_PRIVATE).edit();
+                    editor.putString("username", username);
+                    editor.apply();
+
                     // Set user data to profile views
                     usernameTextView.setText(username);
                     emailTextView.setText(email);
@@ -111,6 +116,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
 
     private void showUpdateDialog() {
         // Inflate the dialog with custom view
@@ -184,7 +190,7 @@ public class ProfileFragment extends Fragment {
                     phoneTextView.setText(phone);
                     locationTextView.setText(location);
 
-                    dialog.dismiss(); // Dismiss the dialog after successful update
+                    dialog.dismiss();
                 } else {
                     Toast.makeText(requireActivity(), "Failed to update user data.", Toast.LENGTH_SHORT).show();
                 }
@@ -249,5 +255,22 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Failed to connect to server.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public String getUsername() {
+        return usernameTextView.getText().toString();
+    }
+
+    public String getLocation() {
+        return locationTextView.getText().toString();
+    }
+
+    public String getAddress() {
+        // Assuming locationTextView is the address. Adjust if necessary.
+        return locationTextView.getText().toString();
+    }
+
+    public String getPhone() {
+        return phoneTextView.getText().toString();
     }
 }
