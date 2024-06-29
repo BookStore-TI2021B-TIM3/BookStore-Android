@@ -3,6 +3,9 @@ package com.example.bookstore.ListOrder;
 import com.google.gson.annotations.SerializedName;
 
 public class Order {
+    @SerializedName("id")
+    private int id; // Unique identifier for the order
+
     @SerializedName("title")
     private String title;
 
@@ -26,6 +29,10 @@ public class Order {
 
     @SerializedName("arrival")
     private String arrival;
+
+    public int getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;

@@ -58,7 +58,7 @@ public class OrderFragment extends Fragment {
                 public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         List<Order> orderList = response.body();
-                        orderAdapter = new OrderAdapter(orderList);
+                        orderAdapter = new OrderAdapter(getContext(), orderList);
                         recyclerView.setAdapter(orderAdapter);
                     } else {
                         Toast.makeText(getContext(), "Failed to fetch orders", Toast.LENGTH_SHORT).show();

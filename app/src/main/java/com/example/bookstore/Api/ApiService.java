@@ -64,5 +64,8 @@ public interface ApiService {
             @Query("date") String date
     );
 
+    @DELETE("delete_order.php")
+    Call<Void> cancelOrder(@Query("order_id") int orderId);
+
 
 }

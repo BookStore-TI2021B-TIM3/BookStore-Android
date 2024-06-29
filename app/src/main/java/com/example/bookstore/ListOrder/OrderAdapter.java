@@ -1,19 +1,29 @@
 package com.example.bookstore.ListOrder;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.bookstore.Api.ApiClient;
+import com.example.bookstore.Api.ApiService;
 import com.example.bookstore.R;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
     private List<Order> orderList;
+    private Context context;
 
-    public OrderAdapter(List<Order> orderList) {
+    public OrderAdapter(Context context, List<Order> orderList) {
+        this.context = context;
         this.orderList = orderList;
     }
 
@@ -34,6 +44,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.price.setText(order.getPrice());
         holder.status.setText(order.getStatus());
         holder.arrival.setText(order.getArrival());
+
+        holder.cancelButton.setOnClickListener(v -> cancelOrder(order.getId(), position, holder));
     }
 
     @Override
@@ -41,8 +53,32 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         return orderList.size();
     }
 
+    private void cancelOrder(int orderId, int position, OrderViewHolder holder) {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        Call<Void> call = apiService.cancelOrder(orderId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    orderList.remove(position);
+                    notifyItemRemoved(position);
+                    Toast.makeText(context, "Order canceled", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Failed to cancel order", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView title, username, phone, address, price, status, arrival;
+        Button cancelButton;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,6 +89,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             price = itemView.findViewById(R.id.textViewPrice);
             status = itemView.findViewById(R.id.textStatus);
             arrival = itemView.findViewById(R.id.textEstimated);
+            cancelButton = itemView.findViewById(R.id.cancel_button);
         }
     }
 }
