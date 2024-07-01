@@ -46,7 +46,7 @@ public class OrderFragment extends Fragment {
     }
 
     private void fetchOrders() {
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_prefs", AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_data", AppCompatActivity.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
 
         if (!username.isEmpty()) {

@@ -1,6 +1,8 @@
 package com.example.bookstore.Detail;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +46,6 @@ public class OrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
 
-        // Initialize views
         bookImage = findViewById(R.id.img_list);
         bookTitle = findViewById(R.id.tv_title);
         bookPrice = findViewById(R.id.label_price);
@@ -52,26 +53,45 @@ public class OrderActivity extends AppCompatActivity {
         tvAuthor = findViewById(R.id.tv_author);
         etUsername = findViewById(R.id.username);
         etPhone = findViewById(R.id.phone);
-        etAddress = findViewById(R.id.address); // EditText for address
-        etDate = findViewById(R.id.date); // EditText for date
+        etAddress = findViewById(R.id.address);
+        etDate = findViewById(R.id.date);
         buyButton = findViewById(R.id.buy_button);
 
-        // Get the Book object from intent
         book = getIntent().getParcelableExtra("book");
 
-        // Display book information
         if (book != null) {
             bookTitle.setText(book.getTitle());
             bookPrice.setText(book.getPrice());
             bookSynopsis.setText(book.getSynopsis());
-            Picasso.get().load(book.getImageUrl()).into(bookImage);
+            // Make sure to use the full URL here as well
+            String imageUrl = "http://192.168.81.67/Web_BookStore/asset/" + book.getImageUrl(); // Replace with your server URL
+            Picasso.get().load(imageUrl).into(bookImage);
             tvAuthor.setText(book.getAuthor());
         }
 
-        // Initialize Calendar instance
+        SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
+        String username = prefs.getString("username", "");
+        String phone = prefs.getString("phone", "");
+        String address = prefs.getString("address", "");
+
+        // Check if there are updated details passed from UpdateUserActivity
+        Intent intent = getIntent();
+        if (intent.hasExtra("username")) {
+            username = intent.getStringExtra("username");
+        }
+        if (intent.hasExtra("phone")) {
+            phone = intent.getStringExtra("phone");
+        }
+        if (intent.hasExtra("address")) {
+            address = intent.getStringExtra("address");
+        }
+
+        etUsername.setText(username);
+        etPhone.setText(phone);
+        etAddress.setText(address);
+
         calendar = Calendar.getInstance();
 
-        // Set click listener on date EditText to show DatePicker
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +99,6 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener on buyButton
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +117,7 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
+
 
     // Method to show DatePickerDialog
     private void showDatePickerDialog() {

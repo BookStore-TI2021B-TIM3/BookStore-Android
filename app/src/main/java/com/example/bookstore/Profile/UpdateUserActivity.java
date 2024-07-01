@@ -63,7 +63,7 @@ public class UpdateUserActivity extends AppCompatActivity {
         progressDialog.setMessage("Updating user...");
         progressDialog.setCancelable(false);
 
-        // Handle submit button click
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,16 +76,10 @@ public class UpdateUserActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(updatedUsername) || TextUtils.isEmpty(updatedEmail)) {
                     Toast.makeText(UpdateUserActivity.this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Show progress dialog
                     progressDialog.show();
-
-                    // Create Retrofit instance
                     ApiService apiService = ApiClient.getClient().create(ApiService.class);
-
-                    // Create UpdateUserRequest object
                     UpdateUserRequest updateUserRequest = new UpdateUserRequest(userId, updatedUsername, updatedEmail, updatedPassword, updatedPhone, updatedLocation);
 
-                    // Make POST request
                     Call<UserResponse> call = apiService.updateUserDetails(updateUserRequest);
                     call.enqueue(new Callback<UserResponse>() {
                         @Override
@@ -95,11 +89,12 @@ public class UpdateUserActivity extends AppCompatActivity {
                                 UserResponse userResponse = response.body();
                                 if (userResponse != null && userResponse.getStatus().equals("success")) {
                                     Toast.makeText(UpdateUserActivity.this, "User details updated successfully", Toast.LENGTH_SHORT).show();
-                                    // Start OrderActivity with the updated username
                                     Intent intent = new Intent(UpdateUserActivity.this, OrderActivity.class);
                                     intent.putExtra("username", updatedUsername);
+                                    intent.putExtra("phone", updatedPhone);
+                                    intent.putExtra("address", updatedLocation);
                                     startActivity(intent);
-                                    finish(); // Close activity after successful update
+                                    finish();
                                 } else {
                                     String errorMessage = "Failed to update user details";
                                     if (userResponse != null && userResponse.getMessage() != null) {

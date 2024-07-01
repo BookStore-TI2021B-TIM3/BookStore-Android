@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookstore.Detail.OrderActivity;
 import com.example.bookstore.R;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHolder> {
@@ -43,7 +43,16 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
         holder.author.setText(book.getAuthor());
         holder.price.setText(book.getPrice());
         holder.rating.setText(String.valueOf(book.getRating()));
-        Picasso.get().load(book.getImageUrl()).into(holder.image);
+
+        // Load image with Picasso, handle empty imageUrl case
+        if (book.getImageUrl() != null && !book.getImageUrl().isEmpty()) {
+            String imageUrl = "http://192.168.81.67/Web_BookStore/asset/" + book.getImageUrl(); // Replace with your server URL
+            Picasso.get().load(imageUrl).into(holder.image);
+        } else {
+            // Handle case where imageUrl is empty or null
+            holder.image.setImageResource(R.drawable.ic_launcher_background); // Placeholder image resource
+        }
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, OrderActivity.class);
             intent.putExtra("book", book);
