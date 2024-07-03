@@ -2,6 +2,7 @@ package com.example.bookstore.Profile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -63,7 +64,6 @@ public class UpdateUserActivity extends AppCompatActivity {
         progressDialog.setMessage("Updating user...");
         progressDialog.setCancelable(false);
 
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +89,16 @@ public class UpdateUserActivity extends AppCompatActivity {
                                 UserResponse userResponse = response.body();
                                 if (userResponse != null && userResponse.getStatus().equals("success")) {
                                     Toast.makeText(UpdateUserActivity.this, "User details updated successfully", Toast.LENGTH_SHORT).show();
+
+                                    // Save updated details to SharedPreferences
+                                    SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = prefs.edit();
+                                    editor.putString("username", updatedUsername);
+                                    editor.putString("phone", updatedPhone);
+                                    editor.putString("address", updatedLocation);
+                                    editor.apply();
+
+                                    // Pass updated details to OrderActivity
                                     Intent intent = new Intent(UpdateUserActivity.this, OrderActivity.class);
                                     intent.putExtra("username", updatedUsername);
                                     intent.putExtra("phone", updatedPhone);

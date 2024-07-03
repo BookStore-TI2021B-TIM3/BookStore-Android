@@ -65,7 +65,7 @@ public interface ApiService {
     );
 
     @DELETE("delete_order.php")
-    Call<Void> cancelOrder(@Query("order_id") int orderId);
+    Call<Void> cancelOrder(@Query("id") int orderId);
 
 
 }

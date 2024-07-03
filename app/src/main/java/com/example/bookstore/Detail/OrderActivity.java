@@ -64,7 +64,7 @@ public class OrderActivity extends AppCompatActivity {
             bookPrice.setText(book.getPrice());
             bookSynopsis.setText(book.getSynopsis());
             // Make sure to use the full URL here as well
-            String imageUrl = "http://192.168.81.67/Web_BookStore/asset/" + book.getImageUrl(); // Replace with your server URL
+            String imageUrl = "http://192.168.81.67/Web_BookStore/assets/img/" + book.getImageUrl(); // Replace with your server URL
             Picasso.get().load(imageUrl).into(bookImage);
             tvAuthor.setText(book.getAuthor());
         }
@@ -117,7 +117,6 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
-
 
     // Method to show DatePickerDialog
     private void showDatePickerDialog() {

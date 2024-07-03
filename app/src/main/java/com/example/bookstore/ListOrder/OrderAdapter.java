@@ -7,12 +7,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.bookstore.Api.ApiClient;
 import com.example.bookstore.Api.ApiService;
 import com.example.bookstore.R;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.status.setText(order.getStatus());
         holder.arrival.setText(order.getArrival());
 
-        holder.cancelButton.setOnClickListener(v -> cancelOrder(order.getId(), position, holder));
+        holder.cancelButton.setOnClickListener(v -> cancelOrder(order.getId(), position));
     }
 
     @Override
@@ -53,7 +57,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         return orderList.size();
     }
 
-    private void cancelOrder(int orderId, int position, OrderViewHolder holder) {
+    private void cancelOrder(int orderId, int position) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<Void> call = apiService.cancelOrder(orderId);
 

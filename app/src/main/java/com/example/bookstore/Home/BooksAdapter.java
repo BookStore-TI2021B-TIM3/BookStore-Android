@@ -46,7 +46,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHold
 
         // Load image with Picasso, handle empty imageUrl case
         if (book.getImageUrl() != null && !book.getImageUrl().isEmpty()) {
-            String imageUrl = "http://192.168.81.67/Web_BookStore/asset/" + book.getImageUrl(); // Replace with your server URL
+            String imageUrl = "http://192.168.81.67/Web_BookStore/assets/img/" + book.getImageUrl(); // Replace with your server URL
             Picasso.get().load(imageUrl).into(holder.image);
         } else {
             // Handle case where imageUrl is empty or null
